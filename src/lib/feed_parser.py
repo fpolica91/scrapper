@@ -1,20 +1,25 @@
+from dataclasses import dataclass
 import feedparser
 import sys
+import typing
+
+@dataclass
+class Scrapper:
+  def get_keys(url: str) -> None:
+    NewsFeed = feedparser.parse(url)
+    entry = NewsFeed.entries[1]
+    print(entry)
+    sys.stdout.flush()
 
 
-def get_keys():
-  NewsFeed = feedparser.parse("https://timesofindia.indiatimes.com/rssfeedstopstories.cms")
-  entry = NewsFeed.entries[1]
-  print(entry)
-  sys.stdout.flush()
-  
 
 
 
 
 
 if __name__ == "__main__":
-  get_keys()
+  scrapper = Scrapper
+  scrapper.get_keys(sys.argv[1])
 
 
 

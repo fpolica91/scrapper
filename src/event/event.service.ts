@@ -13,10 +13,12 @@ export class EventService {
   handleCron() {
     const file = cwd() + '/src/lib/feed_parser.py';
 
-    const python_process = spawn('python', [file]);
+    const python_process = spawn('python', [
+      file,
+      'https://www.judicialwatch.org/feed/',
+    ]);
 
     python_process.stdout.on('data', (data) => {
-      console.log('some data here');
       console.log(data.toString());
     });
 
