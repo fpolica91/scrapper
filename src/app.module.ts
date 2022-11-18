@@ -3,9 +3,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { EventModule } from './event/event.module';
 import { QueueModule } from './queue/queue.module';
+import { AxiosModule } from './axios/axios.module';
 
 @Module({
-  imports: [QueueModule, EventModule],
+  imports: [QueueModule, EventModule, AxiosModule],
   controllers: [AppController],
   providers: [AppService],
 })
