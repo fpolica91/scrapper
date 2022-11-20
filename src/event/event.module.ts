@@ -3,9 +3,10 @@ import { EventService } from './event.service';
 import { EventController } from './event.controller';
 import { ScheduleModule } from '@nestjs/schedule';
 import { AxiosModule } from 'src/axios/axios.module';
+import { QueueModule } from 'src/queue/queue.module';
 
 @Module({
-  imports: [AxiosModule, ScheduleModule.forRoot()],
+  imports: [AxiosModule, QueueModule, ScheduleModule.forRoot()],
   controllers: [EventController],
   providers: [EventService],
 })
