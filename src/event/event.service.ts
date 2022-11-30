@@ -12,7 +12,7 @@ export class EventService {
 
   @Cron('45 * * * * *')
   handleCron() {
-    this.queueService.addUploadNewsJob({ test: 'test' });
+    this.queueService.addUploadNewsJob();
     // const file = cwd() + '/src/lib/feed_parser.py';
     // const python_process = spawn('python', [
     //   file,

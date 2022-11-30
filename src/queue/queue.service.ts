@@ -13,24 +13,16 @@ interface Provider {
 export class QueueService {
   constructor(@InjectQueue('upload-queue') private uploadNewsQueue: Queue) {}
 
-  async addUploadNewsJob(data: any): Promise<void> {
+  async addUploadNewsJob(): Promise<void> {
     INITIAL_PROVIDERS.map((provider: Provider) => {
       const file = cwd() + '/src/lib/feed_parser.py';
       const python_process = spawn('python', [file, provider.rss]);
       python_process.stdout.on('data', (data) => {
-        console.log(data.toString());
+        this.uploadNewsQueue.add('news', {
+          data: data.toString(),
+        });
       });
     });
-    // const file = cwd() + '/src/lib/feed_parser.py';
-    // const python_process = spawn('python', [
-    //   file,
-    //   'https://www.judicialwatch.org/feed/',
-    // ]);
-    // python_process.stdout.on('data', (data) => {
-    //   this.uploadNewsQueue.add('news', {
-    //     data: data.toString(),
-    //   });
-    // });
   }
 }
 // ]]QueueService
